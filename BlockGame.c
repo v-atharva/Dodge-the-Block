@@ -320,244 +320,245 @@ void bgg2(){
 
 void road1()
 {
-glColor3f(0,0,0);
-glBegin(GL_QUAD_STRIP);
-glVertex2f(160,0);
-glVertex2f(750,0);
-glVertex2f(350,800);
-glVertex2f(600,800);
-//glVertex2f(600,800);
-glEnd();
-//mountain(150,780,50);
-tree1(235,740);
-tree1(210,630);
-tree(189,540);
-tree1(153,400);
-tree1(110,230);
-tree(84,100);
-tree1(55,0);
-tree1(500,740);
-tree(522,630);
-tree1(547,530);
-tree1(565,400);
-tree(600,234);
-tree(624,100);
-tree1(643,0);
+	glColor3f(0,0,0);
+	glBegin(GL_QUAD_STRIP);
+	glVertex2f(160,0);
+	glVertex2f(750,0);
+	glVertex2f(350,800);
+	glVertex2f(600,800);
+	//glVertex2f(600,800);
+	glEnd();
+	//mountain(150,780,50);
+	tree1(235,740);
+	tree1(210,630);
+	tree(189,540);
+	tree1(153,400);
+	tree1(110,230);
+	tree(84,100);
+	tree1(55,0);
+	tree1(500,740);
+	tree(522,630);
+	tree1(547,530);
+	tree1(565,400);
+	tree(600,234);
+	tree(624,100);
+	tree1(643,0);
 }
 void road2()
 {
-glColor3f(0,0,0);
-glBegin(GL_QUAD_STRIP);
-glVertex2f(160,0);
-glVertex2f(750,0);
-glVertex2f(350,800);
-glVertex2f(600,800);
-//glVertex2f(600,800);
-glEnd();
-//mountain(150,780,50);
-tree(235,740);
-tree1(210,630);
-tree1(189,540);
-tree(153,400);
-tree1(110,230);
-tree1(84,100);
-tree(55,0);
-tree1(500,740);
-tree1(522,630);
-tree(547,530);
-tree1(565,400);
-tree1(600,234);
-tree(624,100);
-tree(643,0);
+	glColor3f(0,0,0);
+	glBegin(GL_QUAD_STRIP);
+	glVertex2f(160,0);
+	glVertex2f(750,0);
+	glVertex2f(350,800);
+	glVertex2f(600,800);
+	//glVertex2f(600,800);
+	glEnd();
+	//mountain(150,780,50);
+	tree(235,740);
+	tree1(210,630);
+	tree1(189,540);
+	tree(153,400);
+	tree1(110,230);
+	tree1(84,100);
+	tree(55,0);
+	tree1(500,740);
+	tree1(522,630);
+	tree(547,530);
+	tree1(565,400);
+	tree1(600,234);
+	tree(624,100);
+	tree(643,0);
 }
 
 void Divider(int y)
 {
-glColor3f(1,1,1);
-glBegin(GL_QUAD_STRIP);
+	glColor3f(1,1,1);
+	glBegin(GL_QUAD_STRIP);
+	{
+		glVertex2f(450,0+y);
+		glVertex2f(475,0+y);
+		glVertex2f(453,50+y);
+		glVertex2f(475,50+y);
+	}
+	glEnd();
+}
+
+void cloud(int x,int y,int r)
 {
-glVertex2f(450,0+y);
-glVertex2f(475,0+y);
-glVertex2f(453,50+y);
-glVertex2f(475,50+y);
+	int i;
+	glColor4f(0.3,0.4,0.5,0.9);
+	GLfloat twicepi=2.0f*3.14;
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(x,y);
+	for(i=0;i<=20;i++)
+	{
+		glVertex2f( x+(r*cos(i*twicepi/20)), y+((r-10)*sin(i*twicepi/20)));
+	}
+	glEnd();
 }
-glEnd();
-}
-void cloud(int x,int y,int r){
-int i;
-glColor4f(0.3,0.4,0.5,0.9);
-GLfloat twicepi=2.0f*3.14;
-glBegin(GL_TRIANGLE_FAN);
-glVertex2f(x,y);
-for(i=0;i<=20;i++){
 
-glVertex2f( x+(r*cos(i*twicepi/20)), y+((r-10)*sin(i*twicepi/20)));
-
-}glEnd();
-}
 void backGround()
 {
-tree(0,0);
-tree(200,50);
-tree(300,10);
-tree(800,20);
-//cloud(100,100);
+	tree(0,0);
+	tree(200,50);
+	tree(300,10);
+	tree(800,20);
+	//cloud(100,100);
 }
+
 void SpecialKeys(int key, int x, int y)
 {
-if(key == GLUT_KEY_RIGHT)
-{
-//XX = XX + delta;
-CarP = 2;
+	if(key == GLUT_KEY_RIGHT)
+	{
+		//XX = XX + delta;
+		CarP = 2;
+	}
+	else if(key == GLUT_KEY_LEFT)
+	{
+		CarP = 1;
+		//XX = XX - delta;
+	}
+	glutPostRedisplay();
 }
-else if(key == GLUT_KEY_LEFT)
-{
-CarP = 1;
-//XX = XX - delta;
-}
-glutPostRedisplay();
-}
+
 void speed_control()
 {
-if(speed >1000 && speed < 2000)
-{
-fps=1;
+	if(speed >1000 && speed < 2000)
+		fps=1;
+	else if(speed >=2000 && speed < 3000)
+		fps=1;
+	else if(speed >=3000)
+		fps=1;
 }
-else if(speed >=2000 && speed < 3000)
-{
-fps=1;
-}
-else if(speed >=3000)
-{
-fps=1;
-}
-}
+
 void Keys(unsigned char key, int x, int y)
 {
-if(key == 'q')
-exit(1);
+	if(key == 'q')
+	exit(1);
 }
+
 void Timer(int value)
 {
-if(coll!=1)
-speed++;
-printf("%d fps %d",speed,fps);
-glutPostRedisplay();
-glutTimerFunc(fps,Timer,0);
+	if(coll!=1)
+	speed++;
+	printf("%d fps %d",speed,fps);
+	glutPostRedisplay();
+	glutTimerFunc(fps,Timer,0);
 }
 
 void Divider1()
 {
-Divider(40);
-Divider(160);
-Divider(280);
-Divider(380);
-Divider(480);
-Divider(570);
-Divider(660);
-Divider(740);
-//Divider(690);
-//Divider(890);
+	Divider(40);
+	Divider(160);
+	Divider(280);
+	Divider(380);
+	Divider(480);
+	Divider(570);
+	Divider(660);
+	Divider(740);
+	//Divider(690);
+	//Divider(890);
 }
+
 void Divider2()
 {
-Divider(1);
-Divider(121);
-Divider(241);
-Divider(341);
-Divider(441);
-Divider(531);
-Divider(621);
-Divider(701);
-//Divider(71);
-//Divider(850);
-//Divider(950);
+	Divider(1);
+	Divider(121);
+	Divider(241);
+	Divider(341);
+	Divider(441);
+	Divider(531);
+	Divider(621);
+	Divider(701);
+	//Divider(71);
+	//Divider(850);
+	//Divider(950);
 }
 void GameOver()
 {
-glRasterPos2f(350,400);
-char *s = "GAME OVER\n(press Q/q to exit)";
-int j=0;
-while(j<strlen(s))
-{
-glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,(char)s[j]);
-j++;
-}
+	glRasterPos2f(350,400);
+	char *s = "GAME OVER\n(press Q/q to exit)";
+	int j=0;
+	while(j<strlen(s))
+	{
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,(char)s[j]);
+		j++;
+	}
 }
 
-void mouseClick(int button, int state, int x, int y) {
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<410 && y>370)
-flag = 1;
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<410 && y>370)
-flag = 1;
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>370)
-flag = 1;
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
-exit(1);
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
-exit(1);
-if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
-exit(1);
+void mouseClick(int button, int state, int x, int y) 
+{
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<410 && y>370)
+		flag = 1;
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<410 && y>370)
+		flag = 1;
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>370)
+		flag = 1;
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
+		exit(1);
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
+		exit(1);
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN && x>530 && x<620 && y<470 && y>430)
+		exit(1);
 }
+
 void textdisplay()
 {
-glPushMatrix();
-unsigned char title[] = "D DODGE THE BLOCK !!";
-//int l = glutBitmapLength(GLUT_BITMAP_8_BY_13,firstString);
-int len = strlen(title);
-glTranslatef(-110,780,0);
-glScalef(0.6,0.6,0);
-for (int i = 0; i <=len; i++){
-glutStrokeCharacter(GLUT_STROKE_ROMAN,title[i]);
-}
-glPopMatrix();
-unsigned char string3[] = "All you gotta do is dodge the enemy block and save your car ! Are you ready to play?";
-glRasterPos3f (226,700,0);
-len = strlen(string3);
-for (int i = 0; i < len; i++) {
-glutBitmapCharacter(GLUT_BITMAP_8_BY_13, string3[i]);
-}
-
-unsigned char firstString[] = "CHOOSE THE BELOW OPTIONS TO PLAY THE GAME";
-//int l = glutBitmapLength(GLUT_BITMAP_8_BY_13, firstString);
-len = strlen(firstString);
-glRasterPos3f (337,550,0);
-for (int i = 0; i < len; i++)
-{
-glutBitmapCharacter(GLUT_BITMAP_9_BY_15,
-firstString[i]);
-}
-glBegin(GL_LINE_LOOP);
-{
-glVertex2f(440,450);
-glVertex2f(520,450);
-glVertex2f(520,490);
-glVertex2f(440,490);
-}glEnd();
-unsigned char string[] = "START";
-glRasterPos3f (466,465,0);
-len = strlen(string);
-for (int i = 0; i < len; i++)
-
-{
-
-glutBitmapCharacter(GLUT_BITMAP_8_BY_13,
-string[i]);
-}
-glBegin(GL_LINE_LOOP);
-{
-glVertex2f(440,390);
-glVertex2f(520,390);
-glVertex2f(520,430);
-glVertex2f(440,430);
-}glEnd();
-unsigned char string2[] = "QUIT";
-glRasterPos3f (466,405,0);
-len = strlen(string2);
-for (int i = 0; i < len; i++) {
-glutBitmapCharacter(GLUT_BITMAP_8_BY_13,
-string2[i]);
-}
+	glPushMatrix();
+	unsigned char title[] = "D DODGE THE BLOCK !!";
+	//int l = glutBitmapLength(GLUT_BITMAP_8_BY_13,firstString);
+	int len = strlen(title);
+	glTranslatef(-110,780,0);
+	glScalef(0.6,0.6,0);
+	for (int i = 0; i <=len; i++)
+		glutStrokeCharacter(GLUT_STROKE_ROMAN,title[i]);
+	glPopMatrix();
+	unsigned char string3[] = "All you gotta do is dodge the enemy block and save your car ! Are you ready to play?";
+	glRasterPos3f (226,700,0);
+	len = strlen(string3);
+	for (int i = 0; i < len; i++)
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, string3[i]);
+	unsigned char firstString[] = "CHOOSE THE BELOW OPTIONS TO PLAY THE GAME";
+	//int l = glutBitmapLength(GLUT_BITMAP_8_BY_13, firstString);
+	len = strlen(firstString);
+	glRasterPos3f (337,550,0);
+	for (int i = 0; i < len; i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_9_BY_15,
+		firstString[i]);
+	}
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2f(440,450);
+		glVertex2f(520,450);
+		glVertex2f(520,490);
+		glVertex2f(440,490);
+	}
+	glEnd();
+	unsigned char string[] = "START";
+	glRasterPos3f (466,465,0);
+	len = strlen(string);
+	for (int i = 0; i < len; i++)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13,
+		string[i]);
+	}
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2f(440,390);
+		glVertex2f(520,390);
+		glVertex2f(520,430);
+		glVertex2f(440,430);
+	}
+	glEnd();
+	unsigned char string2[] = "QUIT";
+	glRasterPos3f (466,405,0);
+	len = strlen(string2);
+	for (int i = 0; i < len; i++) 
+	{
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13,string2[i]);
+	}
 }
 
 void display(void) {
